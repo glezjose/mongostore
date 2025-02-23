@@ -15,8 +15,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-
-	"go.mongodb.org/mongo-driver/x/bsonx"
 )
 
 // MongoSession is how sessions are stored in MongoDB.
@@ -238,14 +236,10 @@ func (s *Store) insertTTL() error {
 		_, err = s.MongoStore.Collection.Indexes().CreateOne(
 			s.MongoStore.Context,
 			mongo.IndexModel{
-				Keys: bsonx.Doc{
-					bsonx.Elem{
-						Key:   "ttl",
-						Value: bsonx.Int32(1),
-					},
+				Keys: bson.D{
+					{Key: "ttl", Value: 1}, // Use bson.D instead of bsonx.Doc
 				},
 				Options: options.Index().
-					SetBackground(true).
 					SetSparse(true).
 					SetExpireAfterSeconds(int32(s.defaultCookie.MaxAge)),
 			},
