@@ -13,7 +13,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 
-	"github.com/go-stuff/mongostore"
+	"github.com/glezjose/mongostore"
 	"github.com/gorilla/securecookie"
 )
 

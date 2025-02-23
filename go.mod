@@ -1,4 +1,4 @@
-module github.com/go-stuff/mongostore
+module github.com/glezjose/mongostore
 
 go 1.12
 
